@@ -31,7 +31,8 @@ function clone_repo(){
 }
 
 function required_directories(){
-  $(umask 77 && mkdir -p ${clone_path} && mkdir -p ${logdir} 2>${output}) || dump_event 
+  umask 77
+  if [ -d ${clone_path} ]; then echo "[Warning] Directory Exist" && rm -rf ${clone_path} ${logdir}; else  mkdir -p ${clone_path} ${logdir} 2>${output} fi
 }
 
 
@@ -60,7 +61,6 @@ EOF
 done
 
 # run the ansible playbook
-
 echo "**** Running Ansible playbook"
 ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection}"
 if [[ "${?}" -eq 0 ]]; then echo "**** Succesfully created ${#} users - ${@}" ; else "****  There might be an issue" && exit 1; fi

@@ -1,4 +1,5 @@
-# Create asnible user via  the following command
+# Create Users with ansible
+You only need to run the below command and it will automaticallly create the users with given name
 
 
 ### Run this script via the following command
