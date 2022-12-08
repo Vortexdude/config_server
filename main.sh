@@ -48,7 +48,7 @@ required_directories
 clone_repo
 
 # overwrring defaul variables
-default_variable_file="${clone_path}/ansible/roles/${roles}/defaults/main.yml"
+default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
 echo "users: " >${default_variable_file}
 for name in "${@}"
 do
@@ -60,7 +60,7 @@ done
 # run the ansible playbook
 
 echo "**** Running Ansible playbook"
-ansible-playbook ${clone_path}/ansible/create_user.yml -i ${server}, -c ${connection} -e "@${clone_path}/ansible/vars.yml"
+ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection}"
 if [[ "${?}" -eq 0 ]]; then echo "**** Succesfully created ${#} users - ${@}" ; else "****  There might be an issue" && exit 1; fi
 
 echo "**** Deleting temprary files"
