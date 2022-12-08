@@ -42,10 +42,10 @@ if [[ "${os_version}" -eq "Ubuntu" ]]; then apt install ansible jq -y 2>${output
 if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 
 # set the defualt permissions
-required_directories
+required_directories || dump_event
 
 #cloning github repo
-clone_repo
+clone_repo || dump_event
 
 # overwrring defaul variables
 default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
