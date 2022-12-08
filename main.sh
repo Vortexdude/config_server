@@ -16,7 +16,7 @@ if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir
 
 
 function dump_event(){ 
-  echo " [${1]}] ${2}" 
+  echo " [${1}] ${2}" 
   [ ${ignore_errors} ] && status=0 || status=1
   exit ${status}
 }
