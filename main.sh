@@ -32,7 +32,7 @@ function clone_repo(){
 
 function required_directories(){
   umask 77
-  if [ -d ${clone_path} ]; then echo "[Warning] Directory Exist" && rm -rf ${clone_path} ${logdir}; else  mkdir -p ${clone_path} ${logdir} 2>${output} fi
+  if [ -d ${clone_path} ]; then echo "[Warning] Directory Exist" && rm -rf ${clone_path} ${logdir}; else  mkdir -p ${clone_path} ${logdir} 2>${output}; fi
 }
 
 
