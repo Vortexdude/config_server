@@ -10,3 +10,4 @@
   register: sshconfig
 - service: name=sshd state=restarted
   when: sshconfig.changed
+- shell: "echo \"{{ user_pass.stdout }} >> {{ password_file_path }}/password.txt\""
