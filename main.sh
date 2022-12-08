@@ -25,7 +25,7 @@ echo "Please use as $0 user1 user2 user3 ..."
 
 function clone_repo(){
   echo "**** Cloning the repo ${clone_url} in the ${branch_name} branch "
-  $(git clone -b ${branch_name} ${clone_url} ${clone_path} 2>${output})
+  git clone -b ${branch_name} ${clone_url} ${clone_path} 2>${output}
 }
 
 function required_directories(){
