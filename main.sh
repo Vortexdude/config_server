@@ -16,7 +16,7 @@ if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir
 
 
 function dump_event(){ 
-  echo " [${1}] ${2}" 
+  echo " ${1} ${2}" 
   [ ${ignore_errors} ] && status=0 || status=1
   exit ${status}
 }
@@ -26,7 +26,6 @@ echo "Please use as $0 user1 user2 user3 ..."
 }
 
 function clone_repo(){
-  echo "**** Cloning the repo ${clone_url} in the ${branch_name} branch "
   git clone -b ${branch_name} ${clone_url} ${clone_path}
 }
 
