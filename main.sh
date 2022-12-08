@@ -11,7 +11,7 @@ server=localhost
 connection=local
 role=${1:-create_users}
 
-if [[ "${debug_level}" -eq 0 ]]; then output="dev/null"; else output=">${logdir}/error.log"; fi
+if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir}/error.log"; fi
 
 
 function dump_event(){
