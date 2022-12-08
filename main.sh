@@ -9,7 +9,7 @@ branch_name="main"
 os_version=$(cat /etc/os-release | grep PRETTY_NAME | awk -F= '{print $2}' | tr -d '"' | awk '{print $1}')
 server=localhost
 connection=local
-role=${1:-create_users}
+role="${1:-create_users}"
 
 if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir}/error.log"; fi
 
