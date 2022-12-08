@@ -15,7 +15,7 @@ if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir
 
 
 function dump_event(){
-  echo "[Error] There is some error with error code 2>${?}"
+  echo "[Error] There is some error with error code ${?}"
   exit 1
 }
 
@@ -24,7 +24,7 @@ echo "Please use as $0 user1 user2 user3 ..."
 }
 
 function clone_repo(){
-  echo "**** Cloning the repo ${clone_url} in the branch ${branch_name}"
+  echo "**** Cloning the repo ${clone_url} in the ${branch_name} branch "
   $(git clone -b ${branch_name} ${clone_url} "${clone_path}" ${output} 2>${output}) || dump_event
 }
 
@@ -48,10 +48,11 @@ required_directories
 clone_repo
 
 # overwrring defaul variables
-echo "users: " >${clone_path}/ansible/roles/${roles}/defualts/main.yml
+default_variable_file="${clone_path}/ansible/roles/${roles}/defaults/main.yml"
+echo "users: " >${default_variable_file}
 for name in "${@}"
 do
-cat << EOF >> ${clone_path}/ansible/roles/${roles}/defualts/main.yml
+cat << EOF >> ${default_variable_file}
   - { name: ${name}, password: ${name}, admin: true}
 EOF
 done
