@@ -13,11 +13,12 @@ ignore_errors=true
 role="${1:-create_users}"
 
 if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir}/error.log"; fi
-if ${ignore_errors} ; then status=0; else status=$?; fi
+
 
 function dump_event(){
   echo "[Error] There is some error with error code ${?}"
-  exit ${ignore_errors}
+  if ${ignore_errors} ; then status=0; else status=$?; fi
+  exit ${status}
 }
 
 function usage(){
