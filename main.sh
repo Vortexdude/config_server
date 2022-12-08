@@ -15,9 +15,9 @@ role="${1:-create_users}"
 if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir}/error.log"; fi
 
 
-function dump_event(){
-  echo "[Error] There is some error with error code ${?}"
-  if ${ignore_errors} ; then status=0; else status=$?; fi
+function dump_event(){ 
+  echo " [${1]}] ${2}" 
+  [ ${ignore_errors} ] && status=0 || status=1
   exit ${status}
 }
 
@@ -32,23 +32,21 @@ function clone_repo(){
 
 function required_directories(){
   umask 77
-  if [ -d ${clone_path} ]; then echo "[Warning] Directory Exist" && rm -rf ${clone_path} ${logdir}; else  mkdir -p ${clone_path} ${logdir} 2>${output}; fi
+  if [ -d ${clone_path} ]; then dump_event "Warning" "Directory Exist" && rm -rf ${clone_path} ${logdir}; else  mkdir -p ${clone_path} ${logdir}; fi
 }
 
-
-
 # installing ansible 
-echo "**** Installing ansible"
+dump_event "Info" "Installing ansible"
 if [[ "${os_version}" -eq "Ubuntu" ]]; then apt install ansible jq -y 2>${output} >/dev/null; else yum install ansible jq -y 2>${output} >/dev/null; fi
 
 # exit from usages
 if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 
 # set the defualt permissions
-required_directories || dump_event
+required_directories
 
 #cloning github repo
-clone_repo || dump_event
+clone_repo && dump_event "Info" "Cloning the repo ${clone_url} in the ${branch_name} branch " || dump_event "Error" "Can't able to Clone the repo"
 
 # overwrring defaul variables
 default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
