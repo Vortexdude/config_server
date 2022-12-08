@@ -1,0 +1,12 @@
+- shell: "echo -n {{ password }} | sha512sum | cut -c1-15" 
+  register: user_pass
+- user: name="{{ name }}" password="{{ user_pass.stdout | password_hash('sha512') }}"
+- shell: adduser {{ name }} root && adduser {{ name }} sudo
+  when: admin | bool 
+- stat: path=/etc/ssh/sshd_config.d/50-cloudimg-settings.conf
+  register: statofshh
+- lineinfile: line='PasswordAuthentication yes' regex='^PasswordAuthentication' path='/etc/ssh/sshd_config.d/50-cloud-init.conf'
+  when: statofshh.stat.exists
+  register: sshconfig
+- service: name=sshd state=restarted
+  when: sshconfig.changed

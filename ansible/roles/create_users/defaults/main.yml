@@ -1,0 +1,2 @@
+users:
+  - { name: user1, password: user1, admin: true }

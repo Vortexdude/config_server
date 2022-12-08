@@ -1,0 +1,7 @@
+
+- include_tasks: users.yml
+  vars:
+    name: "{{ item.name }}"
+    password: "{{ item.name }}"
+    admin: "{{ item.admin }}"
+  with_items: "{{ users }}"
