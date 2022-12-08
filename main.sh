@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ex
 debug_level=0
 product_name=srelia
 logdir=/var/log/${product_name}/
