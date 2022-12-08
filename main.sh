@@ -9,14 +9,15 @@ branch_name="main"
 os_version=$(cat /etc/os-release | grep PRETTY_NAME | awk -F= '{print $2}' | tr -d '"' | awk '{print $1}')
 server=localhost
 connection=local
+ignore_errors=true
 role="${1:-create_users}"
 
 if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir}/error.log"; fi
-
+if ${ignore_errors} ; then status=0; else status=$?; fi
 
 function dump_event(){
   echo "[Error] There is some error with error code ${?}"
-  exit 1
+  exit ${ignore_errors}
 }
 
 function usage(){
