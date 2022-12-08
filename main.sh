@@ -78,6 +78,7 @@ done
 dump_event "Info" "Running Ansible playbook"
 ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection} 
 [ "${?}" -eq 0 ] && dump_event "Info" "Succesfully created ${#} users - ${@}" ||  dump_event "Error" "There might be an issue with playbook "
-dump_event "Info" "$(cat ${clone_path}/password.txt)" || dump_event "Warning" "Passsword File doesn't exists"
+
+cat ${clone_path}/password.txt || dump_event "Warning" "Passsword File doesn't exists"
 # Deleting temprary files
 [ -d ${clone_path} ] && dump_event "Info" "Deleting temprary files" && rm -rf ${clone_path} || dump_event "Error" "Permission denied"
