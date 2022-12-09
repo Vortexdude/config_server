@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -ex
+set -ex
 
 function dump_event(){ 
   echo "[${1}] ${2}" 
