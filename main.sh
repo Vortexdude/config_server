@@ -7,7 +7,16 @@ function dump_event(){
 }
 
 function usage(){
-echo "Please use as $0 user1 user2 user3 ..."
+  echo "Please use as $0 user1 user2 user3 ..."
+}
+
+function get_bin_path(){
+  path=$(which ${1}) 2>/dev/null
+  if [[ "${?}" -ne 0 ]]
+  then dump_event "Info" "Installing ${1}"
+  ${package_menager} install ${1} -y 2>${output} >/dev/null || dump_event "Error" "Cant able to locate packages in repository"
+  path=$(which ${1}) 2>/dev/null
+  fi
 }
 
 debug_level=0
@@ -16,7 +25,8 @@ logdir=/var/log/${product_name}/
 clone_path="/tmp/.${product_name}/cloned_repo"
 clone_url="https://github.com/Vortexdude/${product_name}"
 branch_name="main"
-os_version=$(cat /etc/os-release | grep PRETTY_NAME | awk -F= '{print $2}' | tr -d '"' | awk '{print $1}')
+os_family=$(awk '/^ID=/' /etc/*-release | sed 's/ID=//' | tr '[:upper:]' '[:lower:]')
+if [[ ${os_family} -eq 'ubuntu' ]]; then package_menager=apt; else package_menager=yum; fi
 server=localhost
 connection=local
 ignore_errors=true
@@ -34,11 +44,11 @@ if [[ "${debug_level}" -eq 0 ]]; then output="/dev/null"; else output=">${logdir
 
 function dump_event(){ 
   echo "[${1}] ${2}" 
-  [ ${ignore_errors} ] || exit 1
+  if [[ "${1}" -eq 'Error' ]]; then [ ${ignore_errors} ] || exit 1; fi
 }
 
 function usage(){
-echo "Please use as $0 user1 user2 user3 ..."
+echo "Please use as ${0} user1 user2 user3 ..."
 }
 
 function clone_repo(){
@@ -54,8 +64,7 @@ function required_directories(){
 if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 
 # installing ansible 
-dump_event "Info" "Installing ansible"
-if [[ "${os_version}" -eq "Ubuntu" ]]; then apt install ansible jq -y 2>${output} >/dev/null; else yum install ansible jq -y 2>${output} >/dev/null; fi
+path=$(get_bin_path "ansible")
 
 # set the defualt permissions
 required_directories
