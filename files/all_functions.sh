@@ -15,7 +15,7 @@ function get_bin_path(){
 
 function install_package(){
     dump_event "Info" "Installing ${1}"
-    ${package_menager} install ${1} -y 2>${output} >/dev/null || dump_event "Error" "Cant able to locate packages in repository" && exit 5
+    ${package_menager} install ${1} -y 2>${output} >/dev/null || dump_event "Error" "Cant able to locate packages in repository"
     dump_event "Success" "${1} Installed"
 }
 
