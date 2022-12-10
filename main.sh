@@ -10,7 +10,7 @@
 product_name=srelia
 clone_path="/tmp/.${product_name}/cloned_repo"
 clone_url="https://github.com/Vortexdude/${product_name}"
-branch_name="main"
+branch_name="new-feature"
 logdir=/var/log/${product_name}/
 debug_level=0
 server=localhost
@@ -32,7 +32,7 @@ fi
 dump_event "Info" "Cloning the repo ${clone_url} in the ${branch_name} branch "
 git clone -b ${branch_name} ${clone_url} ${clone_path} 2>/dev/null || dump_event "Error" "Can't able to clone the Repo check the logs at ${log_dir}"
 
-. ${clone_path}/files/allfunctions.sh
+. ${clone_path}/files/all_functions.sh
 if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 . ${clone_path}/files/helper.sh
 
