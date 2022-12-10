@@ -3,7 +3,7 @@
 # create_directories 
 default_variable_file="${clone_path}/ansible/roles/${role}/files/main.sh"
 
-echo "password_file_path: ${clone_path}" >${default_variable_file} 
+# echo "password_file_path: ${clone_path}" >${default_variable_file} 
 echo "users: " >>${default_variable_file}
 for name in "${@}"
 do
@@ -14,7 +14,7 @@ done
 
 
 dump_event "Info" "Running Ansible playbook"
-ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection} 
+ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection} -e password_file_path=${clone_path}
 [ "${?}" -eq 0 ] && users="${@}" && dump_event "Info" "Succesfully created ${#} users - ${users}" 
 
 cat ${clone_path}/password.txt || dump_event "Warning" "Passsword File doesn't exists"
