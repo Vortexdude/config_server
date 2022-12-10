@@ -1,7 +1,6 @@
 # default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
 
 # create_directories 
-role=$1
 default_variable_file="${clone_path}/ansible/roles/${role}/files/main.sh"
 
 echo "password_file_path: ${clone_path}" >${default_variable_file} 
