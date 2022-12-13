@@ -19,10 +19,6 @@ function install_package(){
     dump_event "Success" "${1} Installed"
 }
 
-function usage(){
-    echo "Please use as ${0} user1 user2 user3 ..." && exit 1
-}
-
 function create_directories(){
   for dir in "${@}"
   do
