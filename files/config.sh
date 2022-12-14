@@ -25,4 +25,10 @@ done
 
 dump_event "Info" "Running Ansible playbook"
 ansible-playbook ${playbook_path} -i ${server}, -c ${connection} --extra-vars "@${var_file_path}"
-[ "${?}" -eq 0 ] && users="${@}" && dump_event "Info" "Succesfully created ${#} users - ${users}" 
+if [ "${?}" -ne 0 ];
+then
+  dump_event "Error" "There is an issue with the playbook" $? 
+else
+  users="${@}"
+  dump_event "Info" "Succesfully created ${#} users - ${users}" 
+fi
