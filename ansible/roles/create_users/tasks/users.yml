@@ -10,4 +10,4 @@
   register: sshconfig
 - service: name=sshd state=restarted
   when: sshconfig.changed
-- lineinfile: line='{{ name }}={{ user_pass.stdout }}' path={{ password_file_path }}/password.txt create=yes
+- debug: var=user_pass.stdout
