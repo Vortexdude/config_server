@@ -13,7 +13,7 @@ source ${role_variable_file}
 
 for variable_type in "${@}"
 do
-  [[ ${variable_type} =~ ^[a-zA-Z] ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
+  [[ ${variable_type} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
 done
 
 cat <<EOF >> ${playbook_path}
