@@ -5,8 +5,6 @@ var_file_path="${clone_path}/ansible/vars.yml"
 cat <<EOF >> ${playbook_path}
 - hosts: all
   become: true
-  vars_file: 
-    - vars.yml
   roles:
 EOF
 
@@ -26,5 +24,5 @@ EOF
 done
 
 dump_event "Info" "Running Ansible playbook"
-ansible-playbook ${clone_path}/ansible/${role}.yml -i ${server}, -c ${connection} --extra-vars "@${var_file_path}"
+ansible-playbook ${playbook_path} -i ${server}, -c ${connection} --extra-vars "@${var_file_path}"
 [ "${?}" -eq 0 ] && users="${@}" && dump_event "Info" "Succesfully created ${#} users - ${users}" 
