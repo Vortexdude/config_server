@@ -11,7 +11,7 @@ source ${role_variable_file}
 # get the variable
 # predefined_variable="type_of_[[:alpha:]]+"
 
-while getops u:h: flags
+while getopts u:h: flags
 do
   case "${flag}" in 
     u) username=${OPTARG};;
