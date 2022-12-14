@@ -10,4 +10,4 @@
   register: sshconfig
 - service: name=sshd state=restarted
   when: sshconfig.changed
-- debug: var=user_pass.stdout
+- debug: msg="{{ name }} = {{ user_pass.stdout }}"
