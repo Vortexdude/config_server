@@ -4,6 +4,18 @@
 role_variable_file="${clone_path}/ansible/roles/*/files/main.sh"
 playbook_path="${clone_path}/ansible/playbook.yml"
 var_file_path="${clone_path}/ansible/vars.yml"
+
+# source the variable type file
+. "${role_variable_file}"
+
+# get the variable
+# predefined_variable="type_of_[[:alpha:]]+"
+
+for variable_type in "${@}"
+do
+  [[ ${variable_type} =~ [:alnum:] ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
+done
+
 cat <<EOF >> ${playbook_path}
 - hosts: all
   become: true
@@ -27,8 +39,6 @@ done
 
 dump_event "Info" "Running Ansible playbook"
 ansible-playbook ${playbook_path} -i ${server}, -c ${connection} --extra-vars "@${var_file_path}"
-echo -e "\n###########\n###Testing variable\n##${role_variable_file}###\n##########\n"
-cat ${role_variable_file}
 if [ "${?}" -ne 0 ];
 then
   dump_event "Error" "There is an issue with the playbook" $?
