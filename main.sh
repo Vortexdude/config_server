@@ -45,6 +45,8 @@ dump_event() {
   if [[ "${rc}" -ne 0 ]]; then exit 1 ||  [ ${ignore_errors} ] ;fi
 }
 
+if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
+
 #Run script as sudo 
 if [ "$EUID" -ne 0 ]; then dump_event "Error" "Please run script with root" 1 ; fi
 
@@ -61,7 +63,6 @@ dump_event "Info" "Cloning the repo ${clone_url} in the ${branch_name} branch "
 git clone -b ${branch_name} ${clone_url} ${clone_path} 2>/dev/null || dump_event "Error" "Can't able to clone the Repo check the logs at ${log_dir}" 1
 
 . ${clone_path}/files/all_functions.sh
-if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 . ${clone_path}/files/helper.sh
 
 install_package "ansible"
