@@ -6,7 +6,7 @@ playbook_path="${clone_path}/ansible/playbook.yml"
 var_file_path="${clone_path}/ansible/vars.yml"
 
 # source the variable type file
-source <(cat "${role_variable_file}")
+source ${role_variable_file}
 
 # get the variable
 # predefined_variable="type_of_[[:alpha:]]+"
