@@ -1,4 +1,0 @@
-- hosts: all
-  become: true
-  roles:
-    - { name: create_users }

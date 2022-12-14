@@ -23,7 +23,7 @@ debug_level=0
 server=localhost
 connection=local
 ignore_errors=true
-role=create_users
+roles=create_users
 
 function usage(){
     echo "Please use as ${0} user1 user2 user3 ..." && exit 1
