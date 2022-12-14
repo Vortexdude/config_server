@@ -1,9 +1,4 @@
 
-
-function usage(){
-  echo -e "\nPlease use as $0 user1 user2 user3 ...\n"
-}
-
 function get_bin_path(){
   path=$(which ${1}) 2>/dev/null
   if [[ "${?}" -ne 0 ]]
