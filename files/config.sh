@@ -1,5 +1,7 @@
 # default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
 
+for role in $roles 
+role_variable_file="${clone_path}/ansible/roles/*/files/main.sh"
 playbook_path="${clone_path}/ansible/playbook.yml"
 var_file_path="${clone_path}/ansible/vars.yml"
 cat <<EOF >> ${playbook_path}
@@ -25,6 +27,8 @@ done
 
 dump_event "Info" "Running Ansible playbook"
 ansible-playbook ${playbook_path} -i ${server}, -c ${connection} --extra-vars "@${var_file_path}"
+echo -e "\n###########\n###Testing variable\n##${role_variable_file}###\n##########\n"
+cat ${role_variable_file}
 if [ "${?}" -ne 0 ];
 then
   dump_event "Error" "There is an issue with the playbook" $?
