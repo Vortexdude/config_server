@@ -1,6 +1,6 @@
 # default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
 
-for role in $roles 
+
 role_variable_file="${clone_path}/ansible/roles/*/files/main.sh"
 playbook_path="${clone_path}/ansible/playbook.yml"
 var_file_path="${clone_path}/ansible/vars.yml"
