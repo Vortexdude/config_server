@@ -23,7 +23,7 @@ debug_level=0
 server=localhost
 connection=local
 ignore_errors=true
-roles=create_users
+roles="${1}"
 
 function usage(){
     echo "Please Give the role name ${0} role_name ..." && exit 1
