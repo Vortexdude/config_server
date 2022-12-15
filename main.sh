@@ -26,7 +26,7 @@ ignore_errors=true
 roles=create_users
 
 function usage(){
-    echo "Please use as ${0} user1 user2 user3 ..." && exit 1
+    echo "Please Give the role name ${0} role_name ..." && exit 1
 }
 
 dump_event() { 
