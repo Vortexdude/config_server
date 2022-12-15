@@ -1,10 +1,5 @@
 # default_variable_file="${clone_path}/ansible/roles/${role}/defaults/main.yml"
 
-read_from_cmd(){
-  read -p " Enter the Users : " users
-}
-
-
 role_variable_file="${clone_path}/ansible/roles/*/files/main.sh"
 playbook_path="${clone_path}/ansible/playbook.yml"
 var_file_path="${clone_path}/ansible/vars.yml"
@@ -17,7 +12,7 @@ source ${role_variable_file}
 # predefined_variable="type_of_[[:alpha:]]+"
 
 # [[ ${username} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
-read_from_cmd
+read -p " Enter the Users : " users
 
 for variable_type in "${users}"
 do
