@@ -11,21 +11,12 @@ source ${role_variable_file}
 # get the variable
 # predefined_variable="type_of_[[:alpha:]]+"
 
-while getopts u:h: flags
+# [[ ${username} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
+
+for variable_type in "${@}"
 do
-  case "${flag}" in 
-    u) username=${OPTARG};;
-    *) usage;;
-    esac
-
+  [[ ${variable_type} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
 done
-
-[[ ${username} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
-
-# for variable_type in "${@}"
-# do
-#   [[ ${variable_type} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
-# done
 
 cat <<EOF >> ${playbook_path}
 - hosts: all
