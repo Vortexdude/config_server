@@ -12,9 +12,9 @@ source ${role_variable_file}
 # predefined_variable="type_of_[[:alpha:]]+"
 
 # [[ ${username} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
-read -p " Enter the Users : " users
+read -a -p " Enter the Users : " users
 
-for variable_type in "${users}"
+for variable_type in ${users[@]}
 do
   [[ ${variable_type} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
 done
@@ -33,7 +33,8 @@ EOF
 done
 
 echo "users: " >> ${var_file_path}
-for name in "${users}"
+
+for name in ${users[@]}
 do
 cat <<EOF >> ${var_file_path}
   - { name: ${name}, password: ${name}, admin: true}
