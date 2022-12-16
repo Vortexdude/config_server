@@ -49,5 +49,5 @@ then
 else
   all_users=${users[@]}
   number_of_users=${#users[@]}
-  dump_event "Info" "Succesfully created [ ${number_of_users} users - ${all_users} ]" 
+  dump_event "Info" "Succesfully created ${number_of_users} users - [ ${all_users} ]" 
 fi
