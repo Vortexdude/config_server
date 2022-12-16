@@ -12,7 +12,7 @@ source ${role_variable_file}
 # predefined_variable="type_of_[[:alpha:]]+"
 
 # [[ ${username} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
-read -a -p " Enter the Users : " users
+read -a users -p " Enter the Users : " 
 
 for variable_type in ${users[@]}
 do
