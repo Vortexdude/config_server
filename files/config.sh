@@ -16,7 +16,7 @@ read -a users -p " Enter the Users : "
 
 for variable_type in ${users[@]}
 do
-  [[ ${variable_type} =~ ${type_of_username} ]] && dump_event "Info" "Variable type is correct" || dump_event "Error" "Dont expect the other type of value" 1
+  [[ ${variable_type} =~ ${type_of_username} ]] || dump_event "Error" "Please Enter the correct username starts with alphabets" 1
 done
 
 cat <<EOF >> ${playbook_path}
