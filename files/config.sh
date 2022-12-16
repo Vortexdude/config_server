@@ -48,5 +48,5 @@ then
   dump_event "Error" "There is an issue with the playbook" $?
 else
   users="${users}"
-  dump_event "Info" "Succesfully created ${#} users - ${users}" 
+  dump_event "Info" "Succesfully created ${#users[@]} users - ${users[@]}" 
 fi
