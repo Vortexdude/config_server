@@ -25,7 +25,7 @@ cat <<EOF >> ${playbook_path}
   roles:
 EOF
 
-for role in ${roles}
+for role in $roles
 do
 cat <<EOF >> ${playbook_path}
     - { name: $role }
