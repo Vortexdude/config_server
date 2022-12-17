@@ -72,4 +72,4 @@ mv ${clone_path}/ansible/roles/*/files/config.sh ${clone_path}/files/config.sh
 . ${clone_path}/files/config.sh
 
 # Deleting temprary files
-[ -d ${clone_path} ] && dump_event "Info" "Deleting temprary files" && rm -rf ${clone_path} || dump_event "Error" "Permission denied"
+# [ -d ${clone_path} ] && dump_event "Info" "Deleting temprary files" && rm -rf ${clone_path} || dump_event "Error" "Permission denied"
