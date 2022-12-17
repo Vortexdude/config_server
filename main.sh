@@ -23,7 +23,7 @@ export debug_level=0
 export server=localhost
 export connection=local
 export ignore_errors=true
-export roles="${1}"
+export roles="${1:-create_users}"
 
 function usage(){
     echo "Please Give the role name ${0} role_name ..." && exit 1
