@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+# set -ex
 
 # Exit status -
 # 1 usages
@@ -67,9 +67,7 @@ git clone -b ${branch_name} ${clone_url} ${clone_path} 2>/dev/null || dump_event
 
 install_package "ansible"
 
-mv ${clone_path}/ansible/roles/*/files/config.sh ${clone_path}/files/config.sh 
-
-. ${clone_path}/files/config.sh
+. ${clone_path}/ansible/roles/*/files/config.sh
 
 # Deleting temprary files
 # [ -d ${clone_path} ] && dump_event "Info" "Deleting temprary files" && rm -rf ${clone_path} || dump_event "Error" "Permission denied"
