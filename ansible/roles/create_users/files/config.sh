@@ -17,10 +17,10 @@ read -a users -p " Enter the Users : "
 if [[ -z ${type_of_username} ]]; then
 for variable_type in ${users[@]}
 do
-  [[ ${variable_type} =~ ${type_of_username} ]] || dump_event "Error" "Please Enter the correct username starts with alphabets" 1
+  dump_event "Error" "Please configure the roles first" 1
 done
 else
-  dump_event "Error" "Please configure the roles first" 1
+  [[ ${variable_type} =~ ${type_of_username} ]] || dump_event "Error" "Please Enter the correct username starts with alphabets" 1
 fi
 cat <<EOF >> ${playbook_path}
 - hosts: all
