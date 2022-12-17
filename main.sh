@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -ex
+set -ex
 
 # Exit status -
 # 1 usages
