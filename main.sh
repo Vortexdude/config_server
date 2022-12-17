@@ -1,7 +1,7 @@
 #!/bin/bash
 # set -ex
 
-# Exit status - 
+# Exit status -
 # 1 usages
 # 5 file not found
 
@@ -14,48 +14,48 @@ yellow="${c};33m"
 clear="${c}m"
 
 #clone the repo
-product_name=srelia
-clone_path="/tmp/.${product_name}/cloned_repo"
-clone_url="https://github.com/Vortexdude/${product_name}"
-branch_name="new-feature"
-logdir=/var/log/${product_name}/
-debug_level=0
-server=localhost
-connection=local
-ignore_errors=true
-roles="${1}"
+export product_name=srelia
+export clone_path="/tmp/.${product_name}/cloned_repo"
+export clone_url="https://github.com/Vortexdude/${product_name}"
+export branch_name="new-feature"
+export logdir=/var/log/${product_name}/
+export debug_level=0
+export server=localhost
+export connection=local
+export ignore_errors=true
+export roles="${1}"
 
 function usage(){
     echo "Please Give the role name ${0} role_name ..." && exit 1
 }
 
-dump_event() { 
+dump_event() {
   rc="${3:-0}"
   if [[ "${1}" == "Error" ]]
-  then 
+  then
     status="${red}${1}${clear}"
   elif [[ "${1}" == "Warning" ]]
-  then 
+  then
     status="${yellow}${1}${clear}"
-  else 
+  else
     status="${green}${1}${clear}"
   fi
 
-  echo -e "[ ${status} ] ${2}\n" 
+  echo -e "[ ${status} ] ${2}\n"
   if [[ "${rc}" -ne 0 ]]; then exit 1 ||  [ ${ignore_errors} ] ;fi
 }
 
 if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 
-#Run script as sudo 
+#Run script as sudo
 if [ "$EUID" -ne 0 ]; then dump_event "Error" "Please run script with root" 1 ; fi
 
 umask 77
 if [ -d ${clone_path} ]
-then 
-  dump_event "Warning" "Directory Exist" 
+then
+  dump_event "Warning" "Directory Exist"
   rm -rf ${clone_path}
-else  
+else
   mkdir -p ${clone_path}
 fi
 
