@@ -45,7 +45,7 @@ dump_event() {
   if [[ "${rc}" -ne 0 ]]; then exit 1 ||  [ ${ignore_errors} ] ;fi
 }
 
-if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
+# if [[ "${#}" -lt 1 ]]; then usage && exit 1; fi
 
 #Run script as sudo
 if [ "$EUID" -ne 0 ]; then dump_event "Error" "Please run script with root" 1 ; fi
