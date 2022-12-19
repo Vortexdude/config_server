@@ -20,7 +20,7 @@ do
   dump_event "Error" "Please configure the roles first" 1
 done
 else
-  [[ ${variable_type} =~ ${type_of_username} ]] || dump_event "Error" "Please Enter the correct username starts with alphabets" 1
+  [[ "${variable_type}" =~ ${type_of_username} ]] || dump_event "Error" "Please Enter the correct username starts with alphabets" 1
 fi
 cat <<EOF >> ${playbook_path}
 - hosts: all
